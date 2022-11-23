@@ -1,0 +1,45 @@
+.profile-container {
+  width: 650px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-img {
+  height: 250px;
+  width: 250px;
+}
+
+.user-img > img {
+  background-color: orange;
+  padding: 10px;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+#image {
+  display: none;
+}
+
+#img-upload-label {
+  cursor: pointer;
+}
+
+.profile-img-container {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.profile-form > button {
+  margin: 30px 0 0px 0;
+}

@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-container {
+  max-width: 650px;
+  margin: 25px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+  font-size: 1.1em;
+}
+
+.form-sub-container {
+  min-width: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-btn {
+  margin: 15px auto;
+  width: 200px;
+}
+
+.error {
+  color: orange;
+  margin-bottom: 10px;
+}
+
+input {
+  height: 35px;
+  border: none;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
