@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LogIn from './forms/LogIn';
-import Register from './forms/Register';
+import LogIn from '../forms/LogIn';
+import Register from '../forms/Register';
 
 const Sign = ({ userState, user }) => {
   const navigate = useNavigate();

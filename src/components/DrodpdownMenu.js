@@ -26,9 +26,12 @@ const DropdownMenu = ({ logOut, user }) => {
     );
   };
   return (
-    <div className="dropdown">
+    <div className="dropdown swing-in-top-fwd">
       <DropdownItem leftIcon={user.img.url} link={'/user'}>
         My Profile
+      </DropdownItem>
+      <DropdownItem leftIcon={'/img/movies.png'} link={'/my-movies'}>
+        My Movies
       </DropdownItem>
       <DropdownItem leftIcon={'/img/bookmark.png'} link={'/watchlist'}>
         Watchlist

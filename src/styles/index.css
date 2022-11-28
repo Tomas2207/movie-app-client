@@ -4,6 +4,8 @@
 @import './switch.css';
 @import './dropdown.css';
 @import './profile.css';
+@import './stars.css';
+@import './searchresult.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&display=swap');
 
@@ -21,22 +23,18 @@ html {
   color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 button {
   background-color: orange;
   max-width: 250px;
   height: 50px;
   margin-bottom: 20px;
-  font-size: 1.3em;
+  font-size: 1.1em;
   cursor: pointer;
   border: none;
   transition: 0.3s;
   color: white;
   font-weight: bold;
+  outline: none;
 }
 
 button:hover {
@@ -49,4 +47,46 @@ button:hover {
 
 a {
   text-decoration: none;
+}
+
+.h2__before::before {
+  height: 100%;
+  width: 12px;
+  content: ' ';
+  outline: solid orange;
+  margin-right: 10px;
+}
+
+.slider__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.slider {
+  width: 90%;
+}
+
+form > label {
+  display: none;
+}
+
+.hide__watchlist {
+  padding: 2rem 4rem;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+.hide__watchlist:hover {
+  background-color: #80808093;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 380px) {
+  .title-h2 {
+    font-size: 25px;
+  }
+  .hide__watchlist {
+    padding: 1rem;
+  }
 }

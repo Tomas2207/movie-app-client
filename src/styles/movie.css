@@ -13,6 +13,13 @@
   margin-top: 50px;
 }
 
+.app__movie-info {
+  background-color: #141414f8;
+  margin: 10px 20px;
+  padding: 20px 30px;
+  font-size: 1.2em;
+}
+
 .slick-slide > a {
   max-width: 250px;
 }
@@ -20,6 +27,7 @@
 .movie {
   max-width: 250px;
   transition: 0.2s;
+  display: flex;
 }
 
 .movie-preview {
@@ -35,13 +43,12 @@
 }
 
 .info-section {
-  margin: 0 15px;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 .info-section > * {
-  width: 65%;
+  width: 75%;
 }
 
 .poster > div {
@@ -68,15 +75,16 @@
 }
 
 .backdrop {
-  height: 400px;
+  height: 500px;
   width: 100%;
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: fixed;
+  background-attachment: fixed;
   -moz-box-shadow: inset 0 -100px 70px -10px #ffa6005b;
   -webkit-box-shadow: inset 0 -100px 70px -10px #ffa6005b;
   box-shadow: inset 0 -100px 70px -10px #ffa6005b;
+  background-position: top center;
 
   display: flex;
   align-items: flex-end;
@@ -85,20 +93,6 @@
 
 .backdrop > h2 {
   font-size: 3em;
-}
-.info::before {
-  height: 100%;
-  width: 12px;
-  content: ' ';
-  outline: solid orange;
-  margin-right: 10px;
-}
-
-.movie-info {
-  background-color: #141414f8;
-  margin: 10px 20px;
-  padding: 20px 30px;
-  font-size: 1.2em;
 }
 
 span {
@@ -119,4 +113,14 @@ span {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 10px;
+}
+
+.loding-btn {
+  position: relative;
+}
+
+.loading-btn img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
 }

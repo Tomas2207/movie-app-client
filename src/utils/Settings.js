@@ -11,25 +11,25 @@ let settings = {
       },
     },
     {
-      breakpoint: 1430,
+      breakpoint: 1520,
       settings: {
         slidesToShow: 4,
       },
     },
     {
-      breakpoint: 1130,
+      breakpoint: 1240,
       settings: {
         slidesToShow: 3,
       },
     },
     {
-      breakpoint: 840,
+      breakpoint: 960,
       settings: {
         slidesToShow: 2,
       },
     },
     {
-      breakpoint: 560,
+      breakpoint: 680,
       settings: {
         slidesToShow: 1,
       },

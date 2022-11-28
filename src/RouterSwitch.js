@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import ExpandMovie from './ExpandMovie';
+import Home from './containers/Home';
+import ExpandMovie from './containers/ExpandMovie/ExpandMovie';
 import Header from './components/Header';
-import Sign from './Sign';
-import SearchResult from './SearchResult';
-import Watchlist from './Watchlist';
+import Sign from './containers/Sign';
+import SearchResult from './containers/SearchResult';
+import Watchlist from './containers/Watchlist';
 import ErrorBoundary from './ErrorBoundary';
-import Profile from './Profile';
+import Profile from './containers/Profile';
+import MyMovies from './containers/MyMovies';
 
 const RouterSwitch = () => {
   const [movieData, setMovieData] = useState();
   const [showData, setShowData] = useState();
   const [user, setUser] = useState();
+  const [loadingSearch, setLoadingSearch] = useState(false);
 
   const getMovies = (url) => {
+    setLoadingSearch(true);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         console.log('movie data', data);
         setMovieData(data);
+        setLoadingSearch(false);
       });
   };
   const getShows = (url) => {
@@ -74,6 +78,8 @@ const RouterSwitch = () => {
                 getShows={getShows}
                 movieData={movieData?.results}
                 showData={showData?.results}
+                user={user}
+                loading={loadingSearch}
               />
             }
           />
@@ -83,19 +89,11 @@ const RouterSwitch = () => {
               <SearchResult
                 getMovies={getMovies}
                 movieData={movieData?.results}
+                loadingSearch={loadingSearch}
               />
             }
           />
-          {/* <Route
-            path="/movie/:id"
-            element={
-              <ExpandMovie
-                getMovies={getMovies}
-                movieData={movieData}
-                user={user}
-              />
-            }
-          /> */}
+
           <Route
             path="/movie/:id"
             element={
@@ -113,6 +111,7 @@ const RouterSwitch = () => {
             element={<Sign userState={userState} user={user} />}
           />
           <Route path="/watchlist" element={<Watchlist user={user} />} />
+          <Route path="/my-movies" element={<MyMovies user={user} />} />
           <Route
             path="/user"
             element={<Profile user={user} userState={userState} />}

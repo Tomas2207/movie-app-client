@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const NavItem = (props) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(open);
+  }, []);
   return (
     <li className="nav-item">
       <a onClick={() => setOpen(!open)} href="#" className="icon-button">

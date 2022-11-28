@@ -55,7 +55,7 @@ const Profile = ({ user, userState }) => {
 
   return (
     <div className="profile-container">
-      <h2 className="info title-h2">
+      <h2 className="h2__before title-h2">
         {user?.name} {user?.lastname}
       </h2>
       <div className="profile-img-container">

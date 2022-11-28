@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Movie from './components/Movie';
+import Movie from '../components/Movie';
 
-const Watchlist = ({ user }) => {
+const MyMovies = ({ user }) => {
   const navigate = useNavigate();
   if (!user) navigate('/');
 
@@ -13,7 +13,8 @@ const Watchlist = ({ user }) => {
     fetch(`${process.env.REACT_APP_API_URL}/watchlist/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
-        const List = data;
+        let List = data?.filter((x) => x.rating > 0);
+
         if (List) setList(List);
         console.log(List);
       });
@@ -25,7 +26,7 @@ const Watchlist = ({ user }) => {
 
   return (
     <div>
-      <h2 className=" info title-h2">Watchlist</h2>
+      <h2 className=" h2__before title-h2">MyMovies</h2>
       {list && Object.keys(list).length !== 0 ? (
         <div className="movie-container">
           {list?.map((value) => {
@@ -33,10 +34,10 @@ const Watchlist = ({ user }) => {
           })}
         </div>
       ) : (
-        <h2>Watchlist is empty... Add something!</h2>
+        <h2>No movies here... Add some!</h2>
       )}
     </div>
   );
 };
 
-export default Watchlist;
+export default MyMovies;

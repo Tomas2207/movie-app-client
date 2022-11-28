@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import Movie from './components/Movie';
-import settings from './utils/Settings';
+import Movie from '../../components/Movie';
+import StarRating from '../../components/StarRating';
+import settings from '../../utils/Settings';
 
 const ExpandComponent = ({ getMovies, movieData, user }) => {
   let { id } = useParams();
@@ -13,6 +14,8 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
   const [inWatchlist, setInWatchlist] = useState(false);
   const [similar, setSimilar] = useState();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [ratingLoad, setRatingLoad] = useState(false);
 
   //env
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -73,55 +76,97 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
     setArrayLimit(!arrayLimit);
   };
 
-  const addToWatchlist = () => {
+  const addToWatchlist = async () => {
     if (!user) navigate('/sign');
+    setLoading(true);
     let databody = {
       id: movieData?.id,
       poster_path: movieData.poster_path,
+      in_watchlist: true,
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/watchlist/${user._id}`, {
-      method: 'POST',
-      body: JSON.stringify(databody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (user) setInWatchlist(true);
-        else navigate('/sign');
-      });
+    const watchlist = await fetch(
+      `${process.env.REACT_APP_API_URL}/watchlist/movie/${movieData?.id}`
+    );
+    const response = await watchlist.json();
+    const Movie = response.find((x) => x.user === user._id);
+    console.log(Movie);
+
+    if (Movie) {
+      fetch(`${process.env.REACT_APP_API_URL}/watchlist/${Movie._id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(databody),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          if (user) setInWatchlist(true);
+          else navigate('/sign');
+        });
+    } else {
+      fetch(`${process.env.REACT_APP_API_URL}/watchlist/${user._id}`, {
+        method: 'POST',
+        body: JSON.stringify(databody),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          if (user) setInWatchlist(true);
+          else navigate('/sign');
+        });
+    }
   };
 
-  const getWatchlist = () => {
+  const getWatchlist = async () => {
+    setRatingLoad(true);
     fetch(`${process.env.REACT_APP_API_URL}/watchlist/movie/${movieData?.id}`)
       .then((res) => res.json())
       .then((data) => {
-        const Movie = data.find((x) => x.user === user._id);
+        console.log('data?', data);
+        const Movie = data.find((x) => x.user === user?._id);
         console.log(Movie);
-        if (Movie !== null && Movie.user === user._id) {
-          console.log(Movie.user, user._id);
+        if (
+          Movie !== null &&
+          Movie?.user === user?._id &&
+          Movie?.in_watchlist === true
+        ) {
+          console.log(Movie?.user, user?._id);
           setInWatchlist(true);
         } else setInWatchlist(false);
+        setRatingLoad(false);
       });
   };
 
   const deleteFromWatchlist = () => {
+    setLoading(true);
+    let databody = {
+      id: movieData?.id,
+      poster_path: movieData.poster_path,
+      in_watchlist: false,
+    };
     fetch(`${process.env.REACT_APP_API_URL}/watchlist/movie/${movieData?.id}`)
       .then((res) => res.json())
       .then((data) => {
         const Movie = data.find((x) => x.user === user._id);
         console.log(Movie);
-        if (Movie !== null && Movie.user === user._id) {
-          console.log(Movie._id);
-          const id = Movie._id;
-          fetch(`${process.env.REACT_APP_API_URL}/watchlist/movie/${id}`, {
-            method: 'DELETE',
+        if (Movie !== null && Movie?.user === user?._id) {
+          fetch(`${process.env.REACT_APP_API_URL}/watchlist/${Movie._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(databody),
+            headers: {
+              'Content-Type': 'application/json',
+            },
           })
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
+              setLoading(false);
               setInWatchlist(false);
             });
         }
@@ -144,6 +189,7 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
     getMovies(URL);
     getSimilar(similarUrl);
   }, []);
+
   useEffect(() => {
     getCredits(creditUrl);
     getMovies(URL);
@@ -163,8 +209,8 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
           backgroundImage: `url("${IMG_URL_OG}")`,
         }}
       ></div>
-      <div className="movie-info">
-        <h2 className="score info">{score?.toFixed(2)}/10</h2>
+      <div className="app__movie-info">
+        <h2 className="h2__before">{score?.toFixed(2)}/10</h2>
         <div className="poster">
           <img src={IMG_URL} alt="" />
           <div>
@@ -175,24 +221,38 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
                 {hours}h {minutes}m
               </span>
             </div>
-            <h2 className="info">Overview</h2>
-            <div>{movieData?.overview}</div>
-            {!inWatchlist ? (
+            <br />
+            {!ratingLoad && (
+              <div>
+                <StarRating user={user} movieData={movieData} />
+              </div>
+            )}
+
+            <br />
+            <h2 className="h2__before">Overview</h2>
+            <p>{movieData?.overview}</p>
+            {!inWatchlist && !loading && (
               <button onClick={addToWatchlist}>Add to Watchlist</button>
-            ) : (
+            )}
+            {inWatchlist && !loading && (
               <div>
                 <h2 className="error">In watchlist</h2>
-                <button onClick={deleteFromWatchlist}>Delete</button>
+                <button onClick={deleteFromWatchlist}>Remove</button>
               </div>
+            )}
+            {loading && (
+              <button className="loading-btn">
+                <img src="/img/reel.png" alt="" className="rotate-center" />
+              </button>
             )}
           </div>
         </div>
         <div className="info-section">
-          <h2 className="info">Genres</h2>
+          <h2 className="h2__before">Genres</h2>
           {movieData?.genres?.map((genre, i) => {
             return <div key={i}>{genre.name}</div>;
           })}
-          {director && <h2 className="info">Director</h2>}
+          {director && <h2 className="h2__before">Director</h2>}
           <div className="actor">
             {director?.profile_path ? (
               <img src={`${imgUrl + director?.profile_path}`} alt="" />
@@ -202,7 +262,7 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
             {director?.name}
           </div>
 
-          <h2 className="info">Cast</h2>
+          <h2 className="h2__before">Cast</h2>
           {actors?.map((actor) => {
             return (
               <div className="actor">
@@ -226,9 +286,9 @@ const ExpandComponent = ({ getMovies, movieData, user }) => {
           ) : (
             <button onClick={showFullCast}> Hide Cast</button>
           )}
-          <h2 className="info title-h2">Similar Movies</h2>
+          <h2 className="h2__before title-h2">Similar Movies</h2>
         </div>
-        <div className="slider-container">
+        <div className="slider__container">
           <Slider {...settings} className="slider">
             {similar?.map((movie) => {
               return (

@@ -84,17 +84,45 @@ const Register = () => {
       {resMessage && <h3 className="error">{resMessage}</h3>}
 
       <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" name="name" onChange={handleChange} />
+        <label classname="hide__label" htmlFor="name">
+          Name:
+        </label>
+        <input
+          type="text"
+          name="name"
+          onChange={handleChange}
+          placeholder="Name"
+        />
         {formErrors && <div className="error">{formErrors.name}</div>}
-        <label htmlFor="lastname">Lastname:</label>
-        <input type="text" name="lastname" onChange={handleChange} />
+        <label classname="hide__label" htmlFor="lastname">
+          Lastname:
+        </label>
+        <input
+          type="text"
+          name="lastname"
+          onChange={handleChange}
+          placeholder="Lastname"
+        />
         {formErrors && <div className="error">{formErrors.lastname}</div>}
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" onChange={handleChange} />
+        <label classname="hide__label" htmlFor="username">
+          Username:
+        </label>
+        <input
+          type="text"
+          name="username"
+          onChange={handleChange}
+          placeholder="Username"
+        />
         {formErrors && <div className="error">{formErrors.username}</div>}
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" onChange={handleChange} />
+        <label classname="hide__label" htmlFor="password">
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          placeholder="Password"
+        />
         {formErrors && <div className="error">{formErrors.password}</div>}
         <button className="form-btn">Sign Up</button>
       </form>

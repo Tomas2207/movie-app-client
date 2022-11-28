@@ -10,9 +10,9 @@ const MovieCarousel = ({ movieData }) => {
       infiniteLoop={true}
       showStatus={false}
     >
-      {movieData?.map((movie) => {
+      {movieData?.map((movie, i) => {
         return (
-          <Link to={{ pathname: `/movie/${movie.id}` }}>
+          <Link key={i} to={{ pathname: `/movie/${movie.id}` }}>
             <div>
               <h2 className="carousel-h2">{movie.title}</h2>
               <div

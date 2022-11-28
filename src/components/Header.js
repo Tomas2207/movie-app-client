@@ -49,17 +49,23 @@ const Header = ({ getMovies, user, getUser }) => {
   return (
     <div className="header">
       <nav className="home-a">
-        <Link to="/">Home</Link>
+        <img src="/img/reel.png" alt="" className="header-reel" />
+        <Link to="/" className="header-title">
+          MovieApp
+        </Link>
       </nav>
       <div id="header-form">
         <form action="" onSubmit={handleSubmit} className="search-form">
-          <label htmlFor="search">Search:</label>
+          <label htmlFor="search" className="hide__label">
+            Search:
+          </label>
           <input
             value={searchValue}
             className="search"
             type="text"
             name="search"
             id=""
+            placeholder="Search..."
             onChange={handleChange}
           />
 

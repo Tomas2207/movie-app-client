@@ -39,30 +39,36 @@ const LogIn = ({ userState }) => {
 
   return (
     <div className="form-sub-container">
-      <h2>Entrar</h2>
+      <h2>Log In</h2>
 
       <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="username">User:</label>
+        <label htmlFor="username" classname="hide__label">
+          User:
+        </label>
         <input
           type="text"
           autoComplete="off"
           name="username"
           value={formValues.username}
-          placeholder="username"
+          placeholder="Username"
           onChange={handleChange}
         />
         {resMessage && <div className="error">{resMessage}</div>}
-        <label htmlFor="password">Password:</label>
+        <label classname="hide__label" htmlFor="password">
+          Password:
+        </label>
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           autoComplete="off"
           name="password"
           value={formValues.password}
           onChange={handleChange}
         />
         {loading ? (
-          <div>Loading...</div>
+          <button className="loading-btn">
+            <img src="/img/reel.png" alt="" className="rotate-center" />
+          </button>
         ) : (
           <button className="form-btn">Entrar</button>
         )}

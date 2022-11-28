@@ -24,7 +24,8 @@ form {
   align-items: center;
 }
 
-.form-btn {
+.form-btn,
+.loading-btn {
   margin: 15px auto;
   width: 200px;
 }

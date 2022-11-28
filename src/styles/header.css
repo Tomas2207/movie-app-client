@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+
 .header {
   background-color: var(--bg);
   /* height: 50px; */
@@ -6,7 +8,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding-bottom: 5px;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 10;
   justify-content: space-between;
@@ -14,26 +16,13 @@
   border-bottom: var(--border);
 }
 
-@media only screen and (max-width: 600px) {
-  .header {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-  }
+.header-title {
+  font-family: 'Squada One', cursive;
+  flex: 2;
+}
 
-  #header-form {
-    grid-row-start: 2;
-    grid-column-start: 1;
-    grid-column-end: -1;
-  }
-
-  .search {
-    min-width: 100px;
-  }
-
-  .back-drop {
-    background-position: top;
-  }
+.header-reel {
+  height: 50px;
 }
 
 nav > a {
@@ -59,17 +48,27 @@ nav > a {
 
 .carousel-h2 {
   position: absolute;
-  bottom: 10px;
-  background-color: orange;
+  bottom: 20px;
+  left: -5px;
+  background-color: var(--bg);
+  opacity: 0.9;
+  font-family: 'Squada One', cursive;
+  font-size: 40px;
+  letter-spacing: 0.04em;
+
+  border-radius: 5px;
   padding: 20px 40px;
   color: white;
-  border-bottom: 5px solid black;
 }
 
 .search {
   width: 250px;
-  height: 20px;
+  height: 31px;
   margin: 0;
+}
+
+.search:focus {
+  outline: none;
 }
 
 .search-form {
@@ -77,31 +76,33 @@ nav > a {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  max-width: 290px;
+  margin: auto;
 }
 
 .search-btn {
-  height: 20px;
+  height: 33px;
   font-size: 1.2em;
   display: flex;
-  padding: 10px;
+  padding: 15px;
   justify-content: center;
   align-items: center;
   margin: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 5px;
 }
 
 nav > div {
   font-size: 1.1em;
 }
 
-.slider-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
+.nav-h2 {
+  text-align: end;
 }
 
-.slider {
-  width: 90%;
+.home-a {
+  display: flex;
+  align-items: center;
 }
 
 .home-a > a,
@@ -114,9 +115,36 @@ nav > div {
 
 .home-a > a:hover,
 .nav-h2:hover {
-  background-color: #8080806e;
+  background-color: rgba(128, 128, 128, 0.61);
+  border-radius: 5px;
 }
 
 .expand {
   width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #header-form {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+
+  .search {
+    min-width: 100px;
+  }
+
+  .back-drop {
+    background-position: center center;
+  }
+
+  .carousel-h2 {
+    font-size: 30px;
+  }
 }
