@@ -6,21 +6,23 @@ form {
 }
 
 .form-container {
-  max-width: 650px;
   margin: 25px auto;
+  height: 450px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background-color: var(--main-color);
+  background-color: var(--bg);
   font-size: 1.1em;
+  border-radius: 5px;
 }
 
 .form-sub-container {
+  flex: 1;
   min-width: 290px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -31,7 +33,7 @@ form {
 }
 
 .error {
-  color: orange;
+  color: var(--neon-orange);
   margin-bottom: 10px;
 }
 

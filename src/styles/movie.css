@@ -59,9 +59,9 @@
 }
 
 .movie:hover {
-  -moz-box-shadow: 0 0 20px orange;
-  -webkit-box-shadow: 0 0 20px orange;
-  box-shadow: 0 0 20px orange;
+  -moz-box-shadow: 0 0 20px var(--neon-orange);
+  -webkit-box-shadow: 0 0 20px var(--neon-orange);
+  box-shadow: 0 0 20px var(--neon-orange);
 }
 
 .movie > img,

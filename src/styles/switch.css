@@ -14,11 +14,13 @@
   position: relative;
   width: 200px;
   height: 50px;
-  border-radius: 25px;
 }
 
 .switch input {
   appearance: none;
+  border-radius: 2px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   width: 200px;
   height: 50px;
 
@@ -54,6 +56,9 @@
   position: absolute;
   top: 10px;
   bottom: 4px;
+  border-radius: 2px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .switch input {
@@ -69,12 +74,12 @@
 .switch input:checked + label {
   left: 10px;
   right: 100px;
-  background-color: orange;
+  background-color: var(--neon-orange);
   transition: left 0.5s, right 0.4s 0.2s;
 }
 
 .switch input:not(:checked) {
-  background-color: orange;
+  background-color: var(--neon-orange);
   transition: background 0.4s;
 }
 
@@ -84,7 +89,7 @@
 }
 
 .switch input:not(:checked)::after {
-  color: orange;
+  color: var(--neon-orange);
   transition: color 0.5s 0.2s;
 }
 

@@ -14,7 +14,7 @@
 }
 
 .user-img > img {
-  background-color: orange;
+  background-color: var(--neon-orange);
   padding: 10px;
   border-radius: 50%;
   height: 100%;

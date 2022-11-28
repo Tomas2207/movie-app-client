@@ -9,6 +9,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&display=swap');
 
+:root {
+  --bg: #242526;
+  --bg-accent: #484a4d;
+  --text-color: #dadce1;
+  --nav-size: 60px;
+  --border: 1px solid #474a4d;
+  --border-radius: 8px;
+  --speed: 500ms;
+  --neon-orange: #ff6700;
+}
+
 * {
   font-family: 'Fira Sans Extra Condensed', sans-serif;
 }
@@ -24,7 +35,7 @@ html {
 }
 
 button {
-  background-color: orange;
+  background-color: var(--neon-orange);
   max-width: 250px;
   height: 50px;
   margin-bottom: 20px;
@@ -53,7 +64,7 @@ a {
   height: 100%;
   width: 12px;
   content: ' ';
-  outline: solid orange;
+  outline: solid var(--neon-orange);
   margin-right: 10px;
 }
 
